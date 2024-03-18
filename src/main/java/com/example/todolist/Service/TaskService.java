@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @Service
 public class TaskService {
 

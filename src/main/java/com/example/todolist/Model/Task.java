@@ -1,6 +1,8 @@
 package com.example.todolist.Model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -8,18 +10,18 @@ import java.util.Date;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
     private String title;
+
     @Column(name = "description")
     private String description;
-    @Column(name = "dateOfCreation")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateOfCreation;
+
     @Column(name = "deadline")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deadline;
+    private LocalDateTime deadline;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private TaskStatus status;
@@ -48,19 +50,19 @@ public class Task {
         this.description = description;
     }
 
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
-    public Date getDeadline() {
+//    public Date getDateOfCreation() {
+//        return dateOfCreation;
+//    }
+//
+//    public void setDateOfCreation(Date dateOfCreation) {
+//        this.dateOfCreation = dateOfCreation;
+//    }
+//
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

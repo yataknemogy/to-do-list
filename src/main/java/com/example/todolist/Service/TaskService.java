@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -18,23 +19,17 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public Task createTask(String title, String description, Date dateOfCreation, Date deadline, Task.TaskStatus status) {
-        Task task = new Task();
-        task.setTitle(title);
-        task.setDescription(description);
-        task.setDateOfCreation(dateOfCreation);
-        task.setDeadline(deadline);
-        task.setStatus(status);
+    public Task saveTask(Task task) {
         return taskRepository.save(task);
     }
 
-    public Task updateTask(Long id, String title, String description, Date dateOfCreation, Date deadline, Task.TaskStatus status){
+    public Task updateTask(Long id, Task task){
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Task with id " + id + " not found"));
-        existingTask.setTitle(title);
-        existingTask.setDescription(description);
-        existingTask.setDeadline(deadline);
-        existingTask.setStatus(status);
+        existingTask.setTitle(task.getTitle());
+        existingTask.setDescription(task.getDescription());
+        existingTask.setDeadline(task.getDeadline());
+        existingTask.setStatus(task.getStatus());
         return taskRepository.save(existingTask);
     }
     public void deleteTask(Long id){
@@ -45,5 +40,8 @@ public class TaskService {
     }
     public List<Task>getTasktsSortebByStatus(){
         return taskRepository.findAllByOrderByStatusAsc();
+    }
+    public Optional<Task>getTaskById(Long id){
+        return taskRepository.findById(id);
     }
 }

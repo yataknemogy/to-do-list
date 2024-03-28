@@ -38,7 +38,7 @@ public class TaskService {
     public List<Task> getAllTasks(){
         return taskRepository.findAll();
     }
-    public List<Task>getTasktsSortebByStatus(){
+    public List<Task>getTasksSortedByStatus(){
         return taskRepository.findAllByOrderByStatusAsc();
     }
     public Optional<Task>getTaskById(Long id){

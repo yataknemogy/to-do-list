@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
@@ -28,7 +28,7 @@ public class TaskController {
         return "tasks"; // Это имя HTML файла без расширения
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/tasks/{id}")
     public String getTaskById(@PathVariable Long id, Model model) {
         Task task = taskService.getTaskById(id).orElseThrow(() -> new RuntimeException("Task not found for " + id));
         model.addAttribute("task", task);
@@ -40,10 +40,9 @@ public class TaskController {
         return taskService.saveTask(task);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTask(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
-        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}/update")

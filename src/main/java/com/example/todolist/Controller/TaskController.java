@@ -25,14 +25,14 @@ public class TaskController {
     public String getAllTasks(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
-        return "tasks"; // Это имя HTML файла без расширения
+        return "tasks";
     }
 
     @GetMapping("/tasks/{id}")
     public String getTaskById(@PathVariable Long id, Model model) {
         Task task = taskService.getTaskById(id).orElseThrow(() -> new RuntimeException("Task not found for " + id));
         model.addAttribute("task", task);
-        return "task"; // Это имя HTML файла без расширения
+        return "task";
     }
 
     @PostMapping("/addtask")
